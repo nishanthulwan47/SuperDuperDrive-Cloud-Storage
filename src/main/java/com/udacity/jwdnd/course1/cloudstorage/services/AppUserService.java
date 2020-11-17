@@ -2,25 +2,27 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.UserMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.AppUser;
+import com.udacity.jwdnd.course1.cloudstorage.security.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
-import java.util.Base64;
 
 @Service
 public class AppUserService {
 
     private final UserMapper userMapper;
     private final HashService hashService;
+    private final EncryptionService encryptionService;
 
 
     private Logger logger = LoggerFactory.getLogger(AppUserService.class);
 
-    public AppUserService(UserMapper userMapper, HashService hashService) {
+    public AppUserService(UserMapper userMapper, HashService hashService, EncryptionService encryptionService) {
         this.userMapper = userMapper;
         this.hashService = hashService;
+        this.encryptionService = encryptionService;
     }
 
     public boolean isUsernameAvailable(String username) {
@@ -31,11 +33,12 @@ public class AppUserService {
         user.setCreatedAt(System.currentTimeMillis());
         user.setUpdatedAt(System.currentTimeMillis());
         SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        String encodedSalt = Base64.getEncoder().encodeToString(salt);
-        String hashedPassword = hashService.getHashedValue(user.getPassword(), encodedSalt);
-        return userMapper.insert(new AppUser(null, user.getUsername(), encodedSalt, hashedPassword, user.getFirstName(), user.getLastName()));
+        String salt = String.valueOf(System.currentTimeMillis());
+        user.setSalt(salt);
+        String hashedPassword = hashService.getHashedValue(user.getPassword(), salt);
+        String encryptedPassword = encryptionService.encryptValue(hashedPassword, Constants.ENCRYPT_KEY);
+        user.setPassword(encryptedPassword);
+        return userMapper.insert(user);
     }
 
     public AppUser getUser(String username) {

@@ -1,6 +1,11 @@
 package com.udacity.jwdnd.course1.cloudstorage.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity(name ="app_user")
@@ -8,54 +13,39 @@ public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userid;
+    private int userid;
 
     @Column(unique = true)
     private String username;
 
+    @NotNull
+    @Size(min = 2, message = "First name must not be less than 2 characters")
     private String firstName;
 
     private String middleName;
 
+    @NotNull(message = "Last name cannot be missing or empty")
+    @Size(min = 2, message = "Last name must not be less than 2 characters")
     private String lastName;
 
+    @NotNull(message="Password is a required field")
+    @Size(min = 8, max = 16, message = "Password must be equal to or greater than 8 characters and less than 16 characters")
     private String password;
 
     private String salt;
 
-
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     private Date dateOfBirth;
 
     @Column(unique = true)
+    @Email
     private String email;
 
     private String phoneNumber;
 
     private Long createdAt;
 
-    private Long updatedAt;
-
-    public Long getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Long userid) {
-        this.userid = userid;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public AppUser() {
-
-    }
-
-    public AppUser(Long userid, String username, String firstName, String middleName, String lastName,
+    public AppUser(int userid, String username, String firstName, String middleName, String lastName,
                    String password, String salt, Date dateOfBirth, String email, String phoneNumber,
                    Long createdAt, Long updatedAt) {
         this.userid = userid;
@@ -71,6 +61,34 @@ public class AppUser {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    private Long updatedAt;
+
+
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public AppUser() {
+
+    }
+
+
 
     public String getUsername() {
         return username;

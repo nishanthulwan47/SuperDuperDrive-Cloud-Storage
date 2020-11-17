@@ -29,12 +29,12 @@ public class SignupController {
     public String signupUser(@ModelAttribute AppUser user, Model model) {
         String signupError = null;
 
-        if (!AppUserService.isUsernameAvailable(user.getUsername())) {
+        if (!appUserService.isUsernameAvailable(user.getUsername())) {
             signupError = "The username already exists.";
         }
 
         if (signupError == null) {
-            int rowsAdded = AppUserService.saveAppUser(user);
+            int rowsAdded = appUserService.saveAppUser(user);
             if (rowsAdded < 0) {
                 signupError = "There was an error signing you up. Please try again.";
             }
