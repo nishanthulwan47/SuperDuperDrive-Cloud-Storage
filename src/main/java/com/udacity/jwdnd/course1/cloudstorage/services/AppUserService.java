@@ -40,7 +40,8 @@ public class AppUserService {
         String hashedPassword = hashService.getHashedValue(user.getPassword(), salt);
         String encryptedPassword = encryptionService.encryptValue(hashedPassword, encodedKey);
         user.setPassword(encryptedPassword);
-        return userMapper.insert(user.getUsername(), user.getSalt(), user.getPassword(), user.getFirstName(), user.getLastName());
+        return userMapper.insert(user.getUsername(), user.getSalt(), user.getPassword(), user.getFirstName(),
+                user.getLastName());
     }
 
     public AppUser getUser(String username) {
