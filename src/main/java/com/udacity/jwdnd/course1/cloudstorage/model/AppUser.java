@@ -3,12 +3,11 @@ package com.udacity.jwdnd.course1.cloudstorage.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-@Entity(name ="app_user")
+@Entity(name ="users")
 public class AppUser {
 
     @Id
@@ -37,17 +36,13 @@ public class AppUser {
     @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     private Date dateOfBirth;
 
-    @Column(unique = true)
-    @Email
-    private String email;
-
     private String phoneNumber;
 
     private Long createdAt;
 
-    public AppUser(int userid, String username, String firstName, String middleName, String lastName,
-                   String password, String salt, Date dateOfBirth, String email, String phoneNumber,
-                   Long createdAt, Long updatedAt) {
+    private Long updatedAt;
+
+    public AppUser(int userid, String username, @NotNull @Size(min = 2, message = "First name must not be less than 2 characters") String firstName, String middleName, @NotNull(message = "Last name cannot be missing or empty") @Size(min = 2, message = "Last name must not be less than 2 characters") String lastName, @NotNull(message = "Password is a required field") @Size(min = 8, max = 16, message = "Password must be equal to or greater than 8 characters and less than 16 characters") String password, String salt, Date dateOfBirth, String phoneNumber, Long createdAt, Long updatedAt) {
         this.userid = userid;
         this.username = username;
         this.firstName = firstName;
@@ -56,13 +51,10 @@ public class AppUser {
         this.password = password;
         this.salt = salt;
         this.dateOfBirth = dateOfBirth;
-        this.email = email;
         this.phoneNumber = phoneNumber;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
-
-
 
     public int getUserid() {
         return userid;
@@ -71,24 +63,6 @@ public class AppUser {
     public void setUserid(int userid) {
         this.userid = userid;
     }
-
-    private Long updatedAt;
-
-
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public AppUser() {
-
-    }
-
-
 
     public String getUsername() {
         return username;
@@ -130,20 +104,20 @@ public class AppUser {
         this.password = password;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhoneNumber() {
