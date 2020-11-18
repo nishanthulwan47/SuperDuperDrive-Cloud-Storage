@@ -38,10 +38,10 @@ public class SignupController {
         if (usernameValidator.isCorrect(user.getUsername())) {
 
             signupError = "1. Username consists of alphanumeric characters (a-z, A-Z, 0-9), lowercase, or uppercase " +
-                    "2. Username allowed of the dot (.), underscore(_), and hyphen (-)" +
-                    "3. The dot (.), underscore (_), or hyphen (-) must not be the first or last character" +
-                    "4. The dot (.), underscore (_), or hyphen (-) does not appear consecutively" +
-                    "5. The number of characters must be between 5 to 20";
+                    " 2. Username allowed of the dot (.), underscore(_), and hyphen (-)" +
+                    " 3. The dot (.), underscore (_), or hyphen (-) must not be the first or last character" +
+                    " 4. The dot (.), underscore (_), or hyphen (-) does not appear consecutively" +
+                    " 5. The number of characters must be between 5 to 20";
 
         }
 

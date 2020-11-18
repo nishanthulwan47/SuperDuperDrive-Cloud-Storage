@@ -12,7 +12,7 @@ public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userid;
+    private Integer userid;
 
     @Column(unique = true)
     private String username;
@@ -42,7 +42,7 @@ public class AppUser {
 
     private Long updatedAt;
 
-    public AppUser(int userid, String username, @NotNull @Size(min = 2, message = "First name must not be less than 2 characters") String firstName, String middleName, @NotNull(message = "Last name cannot be missing or empty") @Size(min = 2, message = "Last name must not be less than 2 characters") String lastName, @NotNull(message = "Password is a required field") @Size(min = 8, max = 16, message = "Password must be equal to or greater than 8 characters and less than 16 characters") String password, String salt, Date dateOfBirth, String phoneNumber, Long createdAt, Long updatedAt) {
+    public AppUser(Integer userid, String username, @NotNull @Size(min = 2, message = "First name must not be less than 2 characters") String firstName, String middleName, @NotNull(message = "Last name cannot be missing or empty") @Size(min = 2, message = "Last name must not be less than 2 characters") String lastName, @NotNull(message = "Password is a required field") @Size(min = 8, max = 16, message = "Password must be equal to or greater than 8 characters and less than 16 characters") String password, String salt, Date dateOfBirth, String phoneNumber, Long createdAt, Long updatedAt) {
         this.userid = userid;
         this.username = username;
         this.firstName = firstName;
@@ -56,11 +56,11 @@ public class AppUser {
         this.updatedAt = updatedAt;
     }
 
-    public int getUserid() {
+    public Integer getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(Integer userid) {
         this.userid = userid;
     }
 
