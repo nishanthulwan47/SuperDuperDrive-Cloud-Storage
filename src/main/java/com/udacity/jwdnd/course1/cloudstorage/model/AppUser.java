@@ -3,6 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -27,9 +28,11 @@ public class AppUser {
     @Size(min = 2, message = "Last name must not be less than 2 characters")
     private String lastName;
 
-    @NotNull(message="Password is a required field")
-    @Size(min = 8, max = 16, message = "Password must be equal to or greater than 8 characters and less than 16 characters")
+    @NotEmpty
     private String password;
+
+    @NotEmpty
+    private String confirmPassword;
 
     private String salt;
 
@@ -42,13 +45,14 @@ public class AppUser {
 
     private Long updatedAt;
 
-    public AppUser(Integer userid, String username, @NotNull @Size(min = 2, message = "First name must not be less than 2 characters") String firstName, String middleName, @NotNull(message = "Last name cannot be missing or empty") @Size(min = 2, message = "Last name must not be less than 2 characters") String lastName, @NotNull(message = "Password is a required field") @Size(min = 8, max = 16, message = "Password must be equal to or greater than 8 characters and less than 16 characters") String password, String salt, Date dateOfBirth, String phoneNumber, Long createdAt, Long updatedAt) {
+    public AppUser(Integer userid, String username, @NotNull @Size(min = 2, message = "First name must not be less than 2 characters") String firstName, String middleName, @NotNull(message = "Last name cannot be missing or empty") @Size(min = 2, message = "Last name must not be less than 2 characters") String lastName, @NotEmpty String password, @NotEmpty String confirmPassword, String salt, Date dateOfBirth, String phoneNumber, Long createdAt, Long updatedAt) {
         this.userid = userid;
         this.username = username;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.password = password;
+        this.confirmPassword = confirmPassword;
         this.salt = salt;
         this.dateOfBirth = dateOfBirth;
         this.phoneNumber = phoneNumber;
@@ -102,6 +106,14 @@ public class AppUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getSalt() {
