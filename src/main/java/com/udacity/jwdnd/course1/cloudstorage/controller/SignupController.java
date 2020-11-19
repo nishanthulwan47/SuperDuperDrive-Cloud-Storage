@@ -37,17 +37,13 @@ public class SignupController {
     public String signupUser(@ModelAttribute AppUser user, Model model, BindingResult result) {
         String signupError = null;
 
-        if (usernameValidator.isCorrect(user.getUsername())) {
-            signupError = "Username does not meet minimum requirements";
-        }
-
-        if (passwordValidator.isValid(user.getPassword())) {
-
-            signupError = "Password does not meet minimum requirements";
-        }
 
         if (!appUserService.isUsernameAvailable(user.getUsername())) {
             signupError = "The username already exists.";
+        }
+
+        if (usernameValidator.isCorrect(user.getUsername())) {
+            signupError = "Username does not meet minimum requirements";
         }
 
         if (signupError == null) {
@@ -55,6 +51,11 @@ public class SignupController {
             if (rowsAdded < 0) {
                 signupError = "There was an error signing you up. Please try again.";
             }
+        }
+
+        if (passwordValidator.isValid(user.getPassword())) {
+
+            signupError = "Password does not meet minimum requirements";
         }
 
         if (signupError == null) {
