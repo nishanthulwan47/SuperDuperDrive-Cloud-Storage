@@ -12,4 +12,5 @@ public interface UserMapper {
             " #{password}, #{firstName}, #{lastName})")
     int insert(String username, String salt, String password, String firstName, String lastName);
 
+
 }
