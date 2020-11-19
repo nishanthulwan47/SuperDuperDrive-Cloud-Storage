@@ -12,9 +12,4 @@ public interface UserMapper {
             " #{password}, #{firstName}, #{lastName})")
     int insert(String username, String salt, String password, String firstName, String lastName);
 
-    @Update("UPDATE USERS SET username=#{username}, firstname=#{firstName}, lastname=#{lastName}")
-    int update(String username, String firstName, String lastName);
-
-    @Delete("DELETE FROM USERS WHERE userid = #{userid}")
-    int Delete(int userid);
 }

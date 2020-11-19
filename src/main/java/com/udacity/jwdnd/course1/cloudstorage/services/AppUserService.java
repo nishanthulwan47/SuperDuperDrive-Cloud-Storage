@@ -31,8 +31,6 @@ public class AppUserService {
     }
 
     public int saveAppUser(AppUser user) {
-        user.setCreatedAt(System.currentTimeMillis());
-        user.setUpdatedAt(System.currentTimeMillis());
         SecureRandom random = new SecureRandom();
         String salt = String.valueOf(System.currentTimeMillis());
         String encodedKey = Base64.getEncoder().encodeToString(Constants.ENCRYPT_KEY.getBytes());
