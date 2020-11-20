@@ -10,20 +10,16 @@ public class AppUser {
 
     private String firstName;
 
-    private String middleName;
-
     private String lastName;
 
     private String password;
 
     private String salt;
 
-
-    public AppUser(Integer userid, String username, String firstName, String middleName, String lastName, String password, String salt) {
+    public AppUser(Integer userid, String username, String firstName, String lastName, String password, String salt) {
         this.userid = userid;
         this.username = username;
         this.firstName = firstName;
-        this.middleName = middleName;
         this.lastName = lastName;
         this.password = password;
         this.salt = salt;
@@ -51,14 +47,6 @@ public class AppUser {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
     }
 
     public String getLastName() {

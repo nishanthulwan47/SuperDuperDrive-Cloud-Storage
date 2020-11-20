@@ -2,7 +2,6 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.UserMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.AppUser;
-import com.udacity.jwdnd.course1.cloudstorage.security.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -32,14 +31,12 @@ public class AppUserService {
 
     public int saveAppUser(AppUser user) {
         SecureRandom random = new SecureRandom();
-        String salt = String.valueOf(System.currentTimeMillis());
-        String encodedKey = Base64.getEncoder().encodeToString(Constants.ENCRYPT_KEY.getBytes());
-        user.setSalt(salt);
-        String hashedPassword = hashService.getHashedValue(user.getPassword(), salt);
-        String encryptedPassword = encryptionService.encryptValue(hashedPassword, encodedKey);
-        user.setPassword(encryptedPassword);
-        return userMapper.insert(user.getUsername(), user.getSalt(), user.getPassword(), user.getFirstName(),
-                user.getLastName());
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        String encodedSalt = Base64.getEncoder().encodeToString(salt);
+        String hashedPass = hashService.getHashedValue(user.getPassword(), encodedSalt);
+
+        return userMapper.insert(user.getUsername(), encodedSalt, hashedPass, user.getFirstName(), user.getLastName());
     }
 
     public AppUser getUser(String username) {
