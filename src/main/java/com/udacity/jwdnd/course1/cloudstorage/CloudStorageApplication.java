@@ -8,12 +8,12 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class CloudStorageApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CloudStorageApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CloudStorageApplication.class, args);
+    }
 
-	@Bean
-	public PasswordValidator PasswordValidator() {
-		return new PasswordValidator();
-	}
+    @Bean
+    public PasswordValidator PasswordValidator() {
+        return new PasswordValidator();
+    }
 }

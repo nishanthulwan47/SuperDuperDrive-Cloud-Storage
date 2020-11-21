@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
@@ -31,13 +32,18 @@ public class HomeController {
         this.fileService = fileService;
     }
 
-    @GetMapping("/home")
+    @GetMapping
+    public String HomePageView() {
+        return "home";
+    }
+
+    @PostMapping
     public String getHomePage(Authentication authentication, Model model) throws IOException {
 
         AppUser appUser = appUserService.getUser(authentication.getPrincipal().toString());
         Integer userId = appUser.getUserid();
         model.addAttribute("files", this.fileService.getAllFilesByUserId(userId));
-        return "home";
+        return "";
     }
 
 }

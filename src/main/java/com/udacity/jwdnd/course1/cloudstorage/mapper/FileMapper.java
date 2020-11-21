@@ -22,7 +22,8 @@ public interface FileMapper {
     @Options(useGeneratedKeys = true, keyProperty = "fileId")
     Integer insert(File file);
 
-    @Update("UPDATE FILES set filename = #{filename}, contenttype = #{contenttype}, filesize = #{filesize}, userId = #{userId}, filedata = #{filedata} where fileId = #{fileId}")
+    @Update("UPDATE FILES set filename = #{filename}, contenttype = #{contenttype}, filesize = #{filesize}, " +
+            "userId = #{userId}, filedata = #{filedata} where fileId = #{fileId}")
     Integer update(File file);
 
     @Delete("DELETE FROM FILES WHERE fileId = #{fileId}")
