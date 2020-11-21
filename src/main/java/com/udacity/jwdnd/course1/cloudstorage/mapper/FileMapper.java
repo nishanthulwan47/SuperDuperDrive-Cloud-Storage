@@ -7,22 +7,26 @@ import java.util.List;
 
 @Mapper
 public interface FileMapper {
-    @Select("SELECT * FROM FILES")
-    List<File> getAllFiles();
 
-    @Insert("INSERT INTO FILES WHERE fileId = #{fileId}")
-    File getFileById(Integer fileId);
+    @Select("SELECT * FROM FILES WHERE userid = #{userid}")
+    List<File> getAllFilesByUserId(Integer userId);
 
-    @Insert("INSERT INTO FILES WHERE userId = #{userID")
-    File getFileByUserId(Integer fileId);
+    @Select("SELECT * FROM FILES WHERE fileId = #{fileId}")
+    File getFileId(Integer fileId);
 
-    @Insert("INSERT INTO FILES(fileName) VALUES (#{fileName}")
-    @Options (useGeneratedKeys = true, keyProperty = "fileId")
-    int addFile(String fileName, String contentType, String fileSize, Integer userId, Byte[] fileData);
+    @Select("SELECT * FROM FILES WHERE filename = #{filename} and userid = #{userId}")
+    File getFile(String filename, Integer userId);
+
+    @Insert("INSERT INTO FILES (filename, contenttype, filesize, userid, filedata)" +
+            "VALUES(#{filename}, #{contenttype}, #{filesize}, #{userid}, #{filedata})")
+    @Options(useGeneratedKeys = true, keyProperty = "fileId")
+    Integer insert(File file);
+
+    @Update("UPDATE FILES set filename = #{filename}, contenttype = #{contenttype}, filesize = #{filesize}, userId = #{userId}, filedata = #{filedata} where fileId = #{fileId}")
+    Integer update(File file);
 
     @Delete("DELETE FROM FILES WHERE fileId = #{fileId}")
-    void Delete(Integer fileId);
-
+    void delete(Integer fileId);
 
 
 }
