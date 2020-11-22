@@ -2,9 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.UserMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.AppUser;
-import com.udacity.jwdnd.course1.cloudstorage.services.AppUserService;
-import com.udacity.jwdnd.course1.cloudstorage.services.AuthenticationService;
-import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
+import com.udacity.jwdnd.course1.cloudstorage.services.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,15 +18,18 @@ public class HomeController {
 
 
     private final AppUserService appUserService;
-
-
+    private final CredentialService credentialService;
+    private final NoteService noteService;
     private final FileService fileService;
 
 
-    public HomeController(AuthenticationService authenticationService, AppUserService appUserService, UserMapper userMapper, FileService fileService) {
+    public HomeController(AuthenticationService authenticationService, AppUserService appUserService,
+                          UserMapper userMapper, CredentialService credentialService, NoteService noteService,
+                          FileService fileService) {
 
         this.appUserService = appUserService;
-
+        this.credentialService = credentialService;
+        this.noteService = noteService;
         this.fileService = fileService;
     }
 
@@ -38,7 +39,7 @@ public class HomeController {
     }
 
     @PostMapping
-    public String getHomePage(Authentication authentication, Model model) throws IOException {
+    public String UploadFiles(Authentication authentication, Model model) throws IOException {
 
         AppUser appUser = appUserService.getUser(authentication.getPrincipal().toString());
         Integer userId = appUser.getUserid();
