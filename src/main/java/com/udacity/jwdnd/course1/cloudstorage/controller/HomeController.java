@@ -2,7 +2,6 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.UserMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.AppUser;
-import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.services.*;
@@ -17,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/home")
@@ -88,12 +88,18 @@ public class HomeController {
 
         try {
             fileService.uploadFile(new File(fileUpload.getOriginalFilename(), fileUpload.getContentType(),
-                    fileUpload.getSize() + "", appUser.getUserid(), fileUpload.getBytes()));
+                    fileUpload.getBytes(), fileUpload.getSize(), appUser.getUserid(), + ""));
+            List<File> files = fileService.getAllFilesByUserId(appUser.getUserid());
+            model.addAttribute("files", files);
+            model.addAttribute("successMessage", files);
+
 
         } catch (IOException e) {
             e.printStackTrace();
             model.addAttribute("errorMessage", e.getMessage());
         }
+
+        return "result";
 
     }
 

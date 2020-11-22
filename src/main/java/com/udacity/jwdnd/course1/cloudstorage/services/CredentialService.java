@@ -14,8 +14,9 @@ public class CredentialService {
 
     private EncryptionService encryptionService;
 
-    public CredentialService(EncryptionService encryptionService) {
+    public CredentialService(EncryptionService encryptionService, CredentialMapper credentialMapper) {
         this.encryptionService = encryptionService;
+        this.credentialMapper = credentialMapper;
     }
 
     @PostConstruct
