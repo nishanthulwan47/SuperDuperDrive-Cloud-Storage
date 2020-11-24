@@ -63,6 +63,7 @@ public class HomeController {
     public String logout() {
         return "login?logout";
     }
+
     @GetMapping("/logout")
     public String logoutView() {
         return "redirect:/login?logout";
@@ -88,7 +89,7 @@ public class HomeController {
 
         try {
             fileService.uploadFile(new File(fileUpload.getOriginalFilename(), fileUpload.getContentType(),
-                    fileUpload.getBytes(), fileUpload.getSize(), appUser.getUserid(), + ""));
+                    fileUpload.getBytes(), fileUpload.getSize(), appUser.getUserid(), ""));
             List<File> files = fileService.getAllFilesByUserId(appUser.getUserid());
             model.addAttribute("files", files);
             model.addAttribute("successMessage", files);
@@ -102,7 +103,6 @@ public class HomeController {
         return "result";
 
     }
-
 
 
 }

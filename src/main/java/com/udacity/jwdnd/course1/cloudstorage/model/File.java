@@ -18,6 +18,9 @@ public class File {
         this.filedata = filedata;
     }
 
+    public File(String originalFilename, String contentType, byte[] bytes, long size, Integer userid, String s) {
+    }
+
     public Integer getFileId() {
         return fileId;
     }
