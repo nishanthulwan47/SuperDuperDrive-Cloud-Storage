@@ -28,7 +28,7 @@ public class NoteController {
         Integer noteid = appUser.getUserid();
 
         try {
-            noteService.createNote(note, userid, noteid);
+            noteService.createNote(note);
             model.addAttribute("success", true);
             model.addAttribute("message", "New note added !");
         } catch (Exception e) {

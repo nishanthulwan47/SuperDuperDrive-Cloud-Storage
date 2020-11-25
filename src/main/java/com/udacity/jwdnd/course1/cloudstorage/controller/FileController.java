@@ -11,10 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -57,8 +54,8 @@ public class FileController {
         return new ModelAndView("result");
     }
 
-    @PostMapping("/credentials/delete")
-    public ModelAndView deleteNote(@ModelAttribute File fileDelete, Authentication authentication, Model model) {
+    @PostMapping("/files/delete")
+    public ModelAndView deleteFile(@ModelAttribute File fileDelete, Authentication authentication, Model model) {
         AppUser appUser = this.appUserService.getUser(authentication.getName());
         Integer userid = appUser.getUserid();
 
@@ -73,7 +70,8 @@ public class FileController {
         return new ModelAndView("result");
     }
 
-    public ResponseEntity<Resource> donwload(@PathVariable("fileId") Integer fileId) {
+    @GetMapping("/download/{fileId}")
+    public ResponseEntity<Resource> download(@PathVariable("fileId") Integer fileId) {
         File file = fileService.getFileById(fileId);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(httpHeaders.CONTENT_DISPOSITION, "attachment; filename = " + file.getFilename());
