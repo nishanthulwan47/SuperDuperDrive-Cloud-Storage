@@ -17,6 +17,17 @@ public class Credential {
         this.userid = userid;
     }
 
+    public Credential(String url, String username, String password, Integer userid) {
+        this.url = url;
+        this.username = username;
+        this.password = password;
+        this.userid = userid;
+    }
+
+    public Credential() {
+
+    }
+
     public Integer getCredentialid() {
         return credentialid;
     }
