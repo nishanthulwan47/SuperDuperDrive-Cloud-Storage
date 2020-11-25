@@ -46,6 +46,6 @@ public class FileService {
    }
 
     public boolean isFilenameAvailable(String fileName, Integer userId) {
-        return (this.fileMapper.getFile(fileName, userId) == null);
+        return ((this.fileMapper.getFile(fileName, userId) == null) ? false : true);
     }
 }

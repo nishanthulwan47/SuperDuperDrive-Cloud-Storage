@@ -57,6 +57,7 @@ public class FileController {
         return new ModelAndView("result");
     }
 
+    @PostMapping("/credentials/delete")
     public ModelAndView deleteNote(@ModelAttribute File fileDelete, Authentication authentication, Model model) {
         AppUser appUser = this.appUserService.getUser(authentication.getName());
         Integer userid = appUser.getUserid();
@@ -72,7 +73,7 @@ public class FileController {
         return new ModelAndView("result");
     }
 
-    public ResponseEntity<Resource> donwloadFileFromLocal(@PathVariable("fileId") Integer fileId) {
+    public ResponseEntity<Resource> donwload(@PathVariable("fileId") Integer fileId) {
         File file = fileService.getFileById(fileId);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(httpHeaders.CONTENT_DISPOSITION, "attachment; filename = " + file.getFilename());
