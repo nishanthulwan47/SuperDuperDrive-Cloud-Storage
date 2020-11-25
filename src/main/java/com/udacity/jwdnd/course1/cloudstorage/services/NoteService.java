@@ -15,8 +15,8 @@ public class NoteService {
         this.noteMapper = noteMapper;
     }
 
-    public int createNote(Note note) {
-        return noteMapper.insert(note);
+    public int createNote(Note note, Integer userid, Integer noteid) {
+        return noteMapper.insert(note, userid, noteid);
     }
 
     public List<Note> getAllNotes() {
