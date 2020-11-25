@@ -3,7 +3,9 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.FileMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -13,6 +15,17 @@ public class FileService {
 
     public FileService(FileMapper fileMapper) {
         this.fileMapper = fileMapper;
+    }
+
+    public int createFile(MultipartFile uploadFile, Integer userid) throws IOException {
+        File file = new File();
+        file.setFilename(uploadFile.getOriginalFilename());
+        file.setContenttype(uploadFile.getContentType());
+        file.setFiledata(uploadFile.getBytes());
+        file.setFilesize(uploadFile.getSize());
+        file.setUserid(userid);
+
+        return fileMapper.insert(file);
     }
 
     public int uploadFile(File file) {
@@ -27,9 +40,10 @@ public class FileService {
         return this.fileMapper.getFileId(id);
     }
 
-    public void deleteFile(Integer id) {
-        this.fileMapper.delete(id);
-    }
+   public int deleteFile(File file, Integer userid) {
+        file.setUserid(userid);
+        return fileMapper.delete(file);
+   }
 
     public boolean isFilenameAvailable(String fileName, Integer userId) {
         return (this.fileMapper.getFile(fileName, userId) == null);

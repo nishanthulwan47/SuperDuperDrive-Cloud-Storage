@@ -16,11 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(
-        value = "/home"
-)
+@RequestMapping(value = "/home")
 public class HomeController {
-
 
     private final AppUserService appUserService;
     private final FileService fileService;
