@@ -43,7 +43,7 @@ public class CredentialService {
         return this.credentialMapper.getCredentialId(id);
     }
 
-    public void deleteCredential(Integer id) {
+    public void deleteCredential(Credential credentialDelete, Integer id) {
         this.credentialMapper.delete(id);
     }
 

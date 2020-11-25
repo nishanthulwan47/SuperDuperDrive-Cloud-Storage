@@ -38,6 +38,7 @@ public class NoteController {
         return new ModelAndView("result");
     }
 
+    @PostMapping("/notes/delete")
     public ModelAndView deleteNote(Authentication authentication, Model model, @ModelAttribute Note note) {
         AppUser appUser = this.appUserService.getUser(authentication.getName());
         Integer userid = appUser.getUserid();
