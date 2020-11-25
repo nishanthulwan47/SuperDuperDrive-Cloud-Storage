@@ -26,6 +26,7 @@ public class NoteController {
         AppUser appUser = this.appUserService.getUser(authentication.getName());
         Integer userid = appUser.getUserid();
         Integer noteid = appUser.getUserid();
+        note.setUserid(userid);
 
         try {
             noteService.createNote(note);
@@ -43,6 +44,7 @@ public class NoteController {
         AppUser appUser = this.appUserService.getUser(authentication.getName());
         Integer userid = appUser.getUserid();
         Integer noteid = appUser.getUserid();
+
 
         try {
             noteService.deleteNote(note, userid);

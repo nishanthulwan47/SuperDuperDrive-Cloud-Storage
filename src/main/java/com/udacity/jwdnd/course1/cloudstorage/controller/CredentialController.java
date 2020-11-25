@@ -26,7 +26,7 @@ public class CredentialController {
     public ModelAndView postCredential(Authentication authentication, Model model, @ModelAttribute Credential credential) {
         AppUser appUser = this.appUserService.getUser(authentication.getName());
         Integer userid = appUser.getUserid();
-
+        credential.setUserid(userid);
         try {
             Integer credentialid = credential.getCredentialid();
             credentialService.addCredential(credential);
