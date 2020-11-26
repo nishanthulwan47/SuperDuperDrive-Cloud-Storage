@@ -33,6 +33,7 @@ class CloudStorageApplicationTests {
 		}
 	}
 
+	@Test
 	public void getSignupAndLogin() {
 		String username = "nishant";
 		String password = "testnishant";
