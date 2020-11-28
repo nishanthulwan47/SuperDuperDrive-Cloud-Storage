@@ -33,7 +33,7 @@ public class HomeController {
 
    @GetMapping
    public String getHomePage(Authentication authentication, Model model) {
-       AppUser appUser =this.appUserService.getUser(authentication.getName());
+       AppUser appUser = this.appUserService.getUser(authentication.getName());
        Integer userId = appUser.getUserid();
        model.addAttribute("credentials", this.credentialService.getCredentialByUserId(userId));
        model.addAttribute("notes", this.noteService.getAllNotesByUserId(userId));
