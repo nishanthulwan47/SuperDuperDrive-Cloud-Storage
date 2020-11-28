@@ -38,9 +38,9 @@ public class HomeController {
        model.addAttribute("credentials", this.credentialService.getCredentialByUserId(userId));
        model.addAttribute("notes", this.noteService.getAllNotesByUserId(userId));
        model.addAttribute("files", this.fileService.getAllFilesByUserId(userId));
-       model.addAttribute("note", new Note());
+       model.addAttribute("noteForm", new Note());
        model.addAttribute("deleteNote", new Note());
-       model.addAttribute("credential", new Credential());
+       model.addAttribute("credentialForm", new Credential());
        model.addAttribute("deleteCredential", new Credential());
        model.addAttribute("deleteFile", new File());
        return "home";
