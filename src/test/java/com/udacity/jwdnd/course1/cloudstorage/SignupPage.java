@@ -17,7 +17,7 @@ public class SignupPage {
     @FindBy(xpath = "/html/body/div/form/div[2]/div[1]/input")
     private WebElement usernameField;
 
-    @FindBy(xpath = "/html/body/div/form/div[2]/div[2]/input")
+    @FindBy(xpath = "/html/body/div/form/div[3]/input")
     private WebElement passwordField;
 
     public SignupPage(WebDriver webDriver) {
