@@ -8,20 +8,17 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SignupPage {
 
-    @FindBy(css = "#inputFirstName")
+    @FindBy(xpath = "/html/body/div/form/div[1]/div[1]/input")
     private WebElement firstNameField;
 
-    @FindBy(css = "#inputLastName")
+    @FindBy(xpath = "/html/body/div/form/div[1]/div[2]/input")
     private WebElement lastNameField;
 
-    @FindBy(css = "#inputUsername")
+    @FindBy(xpath = "/html/body/div/form/div[2]/div[1]/input")
     private WebElement usernameField;
 
-    @FindBy(css = "#inputPassword")
+    @FindBy(xpath = "/html/body/div/form/div[2]/div[2]/input")
     private WebElement passwordField;
-
-    @FindBy(css = "#submit-button")
-    private WebElement submitButton;
 
     public SignupPage(WebDriver webDriver) {
         PageFactory.initElements(webDriver, this);
@@ -32,6 +29,7 @@ public class SignupPage {
         this.lastNameField.sendKeys(lastName);
         this.usernameField.sendKeys(username);
         this.passwordField.sendKeys(password);
-        this.submitButton.click();
     }
+
+
 }

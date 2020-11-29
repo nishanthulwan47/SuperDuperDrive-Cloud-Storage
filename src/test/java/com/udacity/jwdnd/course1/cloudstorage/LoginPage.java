@@ -7,10 +7,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
-    @FindBy(css = "#inputUsername")
+    @FindBy(xpath = "/html/body/div/form/div[2]/input")
     private WebElement usernameField;
 
-    @FindBy(css = "#inputPassword")
+    @FindBy(xpath = "/html/body/div/form/div[3]/input")
     private WebElement passwordField;
 
     @FindBy(css = "#submit-button")
