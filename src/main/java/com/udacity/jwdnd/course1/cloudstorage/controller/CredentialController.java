@@ -47,10 +47,10 @@ public class CredentialController {
         try {
             credentialService.deleteCredential(credentialDelete, userid);
             model.addAttribute("success", true);
-            model.addAttribute("message", "Credentials were deleted successfully");
+            model.addAttribute("message", "Credentials Deleted");
         } catch (Exception e) {
             model.addAttribute("error", true);
-            model.addAttribute("message", "Error while adding credentials" + e.getMessage());
+            model.addAttribute("message", "System error" + e.getMessage());
         }
         return new ModelAndView("result");
     }
