@@ -18,7 +18,7 @@ public class ResultPage {
     }
 
     public String getSuccessMessage() {
-        return successMessage.getAttribute("Success");
+        return successMessage.getAttribute("New note added");
     }
 
     public String getErrorMessage() {

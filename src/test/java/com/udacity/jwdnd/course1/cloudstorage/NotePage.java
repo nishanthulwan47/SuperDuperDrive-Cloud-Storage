@@ -75,4 +75,5 @@ public class NotePage {
     public String getNoteTitle() {
         return tableNoteTitle.getAttribute("Note title");
     }
+
   }
