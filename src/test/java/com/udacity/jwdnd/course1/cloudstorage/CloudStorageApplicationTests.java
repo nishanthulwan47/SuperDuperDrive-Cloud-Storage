@@ -64,5 +64,25 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("Login", driver.getTitle());
 	}
 
+	public void createNote(NotePage notePage, String title, String description) {
+		notePage.openNoteTab();
+		notePage.openModal();
+		notePage.createNote(title, description);
+		notePage.saveNote();
+	}
+
+	@Test
+	public void createNoteTest() {
+		getSignupAndLogin();
+		NotePage notePage = new NotePage(driver);
+		ResultPage resultPage = new ResultPage(driver);
+		createNote(notePage, "Note title", "Note description");
+		Assertions.assertEquals("Result", driver.getTitle());
+		Assertions.assertEquals("Note has been added", resultPage.getSuccessMessage());
+		driver.get("http://localhost:" + this.port + "/home");
+		notePage.openNoteTab();
+		Assertions.assertEquals("Note title", notePage.getNoteTitle());
+	}
+
 
 }

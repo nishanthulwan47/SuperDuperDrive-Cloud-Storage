@@ -8,17 +8,20 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SignupPage {
 
-    @FindBy(xpath = "/html/body/div/form/div[1]/div[1]/input")
+    @FindBy(css = "#inputFirstName")
     private WebElement firstNameField;
 
-    @FindBy(xpath = "/html/body/div/form/div[1]/div[2]/input")
+    @FindBy(css = "#inputLastName")
     private WebElement lastNameField;
 
-    @FindBy(xpath = "/html/body/div/form/div[2]/div[1]/input")
+    @FindBy(css = "#inputUsername")
     private WebElement usernameField;
 
-    @FindBy(xpath = "/html/body/div/form/div[3]/input")
+    @FindBy(css = "#inputPassword")
     private WebElement passwordField;
+
+    @FindBy(css = "#submit-button")
+    private WebElement submitButton;
 
     public SignupPage(WebDriver webDriver) {
         PageFactory.initElements(webDriver, this);
