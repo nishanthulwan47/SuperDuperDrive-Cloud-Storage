@@ -101,7 +101,7 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("Note updated", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTab();
-		Assertions.assertEquals("false", "");
+		Assertions.assertEquals("Edited note title", notePage.getNoteTitle());
 
 	}
 
