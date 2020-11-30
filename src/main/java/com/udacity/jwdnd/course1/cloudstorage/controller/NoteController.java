@@ -25,7 +25,6 @@ public class NoteController {
     public ModelAndView postNote(Authentication authentication, Model model, @ModelAttribute Note note) {
         AppUser appUser = this.appUserService.getUser(authentication.getName());
         Integer userid = appUser.getUserid();
-        Integer noteid = appUser.getUserid();
         note.setUserid(userid);
 
         try {
@@ -43,11 +42,11 @@ public class NoteController {
     public ModelAndView deleteNote(Authentication authentication, Model model, @ModelAttribute Note note) {
         AppUser appUser = this.appUserService.getUser(authentication.getName());
         Integer userid = appUser.getUserid();
-        Integer noteid = appUser.getUserid();
+        Integer noteid = note.getNoteid();
 
 
         try {
-            noteService.deleteNote(note, userid);
+            noteService.deleteNote(note, noteid);
             model.addAttribute("success", true);
             model.addAttribute("message", "Note has been deleted successfully");
         } catch (Exception e) {

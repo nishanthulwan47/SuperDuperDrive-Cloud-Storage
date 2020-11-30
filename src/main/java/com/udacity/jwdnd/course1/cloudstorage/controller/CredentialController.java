@@ -28,7 +28,7 @@ public class CredentialController {
         Integer userid = appUser.getUserid();
         credential.setUserid(userid);
         try {
-            Integer credentialid = credential.getCredentialid();
+            Integer credId = credential.getCredentialid();
             credentialService.addCredential(credential);
             model.addAttribute("success", true);
             model.addAttribute("message", "successfully added credentials");
@@ -43,9 +43,11 @@ public class CredentialController {
     public ModelAndView deleteCredential(Authentication authentication, Model model, @ModelAttribute Credential credentialDelete) {
         AppUser appUser = this.appUserService.getUser(authentication.getName());
         Integer userid = appUser.getUserid();
+        Integer credentialId = credentialDelete.getCredentialid();
+
 
         try {
-            credentialService.deleteCredential(credentialDelete, userid);
+            credentialService.deleteCredential(credentialDelete, credentialId);
             model.addAttribute("success", true);
             model.addAttribute("message", "Credentials Deleted");
         } catch (Exception e) {
