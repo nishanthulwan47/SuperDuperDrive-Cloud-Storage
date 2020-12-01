@@ -34,7 +34,7 @@ public class NotePage {
     @FindBy(css = "#noteSubmit")
     private WebElement noteSubmit;
 
-    @FindBy(css = "editNoteButton")
+    @FindBy(css = "#editNoteButton")
     private WebElement editNote;
 
     @FindBy(css = "#deleteNoteButton")
@@ -77,7 +77,7 @@ public class NotePage {
     }
 
     public String getNoteTitle() {
-        return tableNoteTitle.getAttribute("Note title");
+        return tableNoteTitle.getAttribute("noteTitle");
     }
 
     public boolean hasNotes() {

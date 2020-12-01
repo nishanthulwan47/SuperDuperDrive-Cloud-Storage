@@ -76,12 +76,12 @@ class CloudStorageApplicationTests {
 		getSignupAndLogin();
 		NotePage notePage = new NotePage(driver);
 		ResultPage resultPage = new ResultPage(driver);
-		createNote(notePage, "Note title", "Note description");
+		createNote(notePage, "noteTitle", "Note description");
 		Assertions.assertEquals("Result", driver.getTitle());
-		Assertions.assertEquals("New note added", resultPage.getSuccessMessage());
+		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTab();
-		Assertions.assertEquals("Note title", notePage.getNoteTitle());
+		Assertions.assertEquals("noteTitle", notePage.getNoteTitle());
 	}
 
 	@Test
@@ -89,16 +89,16 @@ class CloudStorageApplicationTests {
 		getSignupAndLogin();
 		NotePage notePage = new NotePage(driver);
 		ResultPage resultPage = new ResultPage(driver);
-		createNote(notePage, "Note title", "Note description");
+		createNote(notePage, "noteTitle", "Note description");
 		Assertions.assertEquals("Result", driver.getTitle());
-		Assertions.assertEquals("Note has been added", resultPage.getSuccessMessage());
+		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTab();
 		notePage.editNote();
-		notePage.createNote("Note title edited", "note description edited");
+		notePage.createNote("Edited note title", "Edited note description");
 		notePage.saveNote();
 		Assertions.assertEquals("Result", driver.getTitle());
-		Assertions.assertEquals("Note updated", resultPage.getSuccessMessage());
+		Assertions.assertEquals("Note updated!", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTab();
 		Assertions.assertEquals("Edited note title", notePage.getNoteTitle());

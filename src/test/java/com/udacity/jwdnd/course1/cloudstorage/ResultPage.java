@@ -7,10 +7,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ResultPage {
 
-    @FindBy(xpath = "/html/body/div/div/h1")
+    @FindBy(css = "#success-message")
     private WebElement successMessage;
 
-    @FindBy(xpath = "/html/body/div/div[2]/h1")
+    @FindBy(css = "#error-message")
     private WebElement errorMessage;
 
     public ResultPage(WebDriver webDriver) {
@@ -18,10 +18,10 @@ public class ResultPage {
     }
 
     public String getSuccessMessage() {
-        return successMessage.getAttribute("Success");
+        return successMessage.getText();
     }
 
     public String getErrorMessage() {
-        return errorMessage.getAttribute("Error");
+        return errorMessage.getText();
     }
 }
