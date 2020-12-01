@@ -119,12 +119,33 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("Note has been deleted successfully", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTabJS();
-		Assertions.assertEquals(false, notePage.hasNotes());
+		//Assertions.assertEquals(false, notePage.hasNotes());
 
 	}
 
+	@Test
+	public void createCredential(CredentialPage credentialPage, String url, String username, String password) {
 
+		credentialPage.openCredentialModal();
+		credentialPage.openCredentialTab();
+		credentialPage.createCredential(url, username, password);
+		credentialPage.saveCredentials();
 
+	}
+
+	@Test
+	public void createCredentialTest() {
+
+		getSignupAndLogin();
+		CredentialPage credentialPage = new CredentialPage(driver);
+		ResultPage resultPage = new ResultPage(driver);
+		createCredential(credentialPage, "credential url", "credential username", "credential password");
+		Assertions.assertEquals("Result", driver.getTitle());
+		Assertions.assertEquals("successfully added credentials", resultPage.getSuccessMessage());
+		driver.get("http://localhost:" + this.port + "/home");
+		credentialPage.openCredentialTab();
+		Assertions.assertEquals("Credential Url", credentialPage.getCredentialUrl());
+	}
 
 
 }
