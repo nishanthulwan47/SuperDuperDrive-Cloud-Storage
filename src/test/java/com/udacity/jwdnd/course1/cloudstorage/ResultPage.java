@@ -18,10 +18,10 @@ public class ResultPage {
     }
 
     public String getSuccessMessage() {
-        return successMessage.getText();
+        return successMessage.getAttribute("innerHTML");
     }
 
     public String getErrorMessage() {
-        return errorMessage.getText();
+        return errorMessage.getAttribute("innerHTML");
     }
 }
