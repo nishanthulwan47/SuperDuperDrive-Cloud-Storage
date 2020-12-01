@@ -65,10 +65,10 @@ class CloudStorageApplicationTests {
 	}
 
 	public void createNote(NotePage notePage, String title, String description) {
-		notePage.openNoteTab();
-		notePage.openModal();
-		notePage.createNote(title, description);
-		notePage.saveNote();
+		notePage.openNoteTabJS();
+		notePage.openModalJS();
+		notePage.createNoteJS(title, description);
+		notePage.saveNoteJS();
 	}
 
 	@Test
@@ -76,12 +76,12 @@ class CloudStorageApplicationTests {
 		getSignupAndLogin();
 		NotePage notePage = new NotePage(driver);
 		ResultPage resultPage = new ResultPage(driver);
-		createNote(notePage, "notetitle", "Note description");
+		createNote(notePage, "Note title", "Note description");
 		Assertions.assertEquals("Result", driver.getTitle());
 		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
-		notePage.openNoteTab();
-		Assertions.assertEquals("notetitle", notePage.getNoteTitle());
+		notePage.openNoteTabJS();
+		Assertions.assertEquals("Note title", notePage.getTableNoteTitle());
 	}
 
 	@Test
@@ -89,21 +89,40 @@ class CloudStorageApplicationTests {
 		getSignupAndLogin();
 		NotePage notePage = new NotePage(driver);
 		ResultPage resultPage = new ResultPage(driver);
-		createNote(notePage, "notetitle", "Note description");
+		createNote(notePage, "Note title", "Note description");
 		Assertions.assertEquals("Result", driver.getTitle());
 		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
-		notePage.openNoteTab();
-		notePage.editNote();
-		notePage.createNote("Edited note title", "Edited note description");
-		notePage.saveNote();
+		notePage.openNoteTabJS();
+		notePage.editNoteJS();
+		notePage.createNoteJS("Note title", "Edited note description");
+		notePage.saveNoteJS();
 		Assertions.assertEquals("Result", driver.getTitle());
-		Assertions.assertEquals("Note updated!", resultPage.getSuccessMessage());
+		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
-		notePage.openNoteTab();
-		Assertions.assertEquals("Edited note title", notePage.getNoteTitle());
+		notePage.openNoteTabJS();
+		Assertions.assertEquals("Note title", notePage.getTableNoteTitle());
+	}
+
+	@Test
+	public void deleteNoteTest() {
+		getSignupAndLogin();
+		NotePage notePage = new NotePage(driver);
+		ResultPage resultPage = new ResultPage(driver);
+		createNote(notePage, "Note title", "Note description");
+		Assertions.assertEquals("Result", driver.getTitle());
+		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
+		driver.get("http://localhost:" + this.port + "/home");
+		notePage.openNoteTabJS();
+		notePage.deleteNoteJS();
+		Assertions.assertEquals("Result", driver.getTitle());
+		Assertions.assertEquals("Note has been deleted successfully", resultPage.getSuccessMessage());
+		driver.get("http://localhost:" + this.port + "/home");
+		notePage.openNoteTabJS();
+		Assertions.assertEquals(false, notePage.hasNotes());
 
 	}
+
 
 
 

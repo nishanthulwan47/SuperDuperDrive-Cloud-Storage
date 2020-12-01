@@ -20,7 +20,7 @@ public class NotePage {
     private WebElement addNote;
 
     @FindBy(css = "#note-title")
-    private WebElement noteTitle;
+    private WebElement noteTitleField;
 
     @FindBy(css = "#table-noteTitle")
     private WebElement tableNoteTitle;
@@ -29,10 +29,10 @@ public class NotePage {
     private WebElement notesTable;
 
     @FindBy(css = "#note-description")
-    private WebElement noteDescription;
+    private WebElement noteDescriptionField;
 
     @FindBy(css = "#noteSubmit")
-    private WebElement noteSubmit;
+    private WebElement saveNote;
 
     @FindBy(css = "#editNoteButton")
     private WebElement editNote;
@@ -40,57 +40,57 @@ public class NotePage {
     @FindBy(css = "#deleteNoteButton")
     private WebElement deleteNote;
 
-    private final JavascriptExecutor javascriptExecutor;
+    private final JavascriptExecutor js;
 
-    private final WebDriverWait webDriverWait;
+    private final WebDriverWait wait;
 
     public NotePage(WebDriver webDriver) {
         PageFactory.initElements(webDriver, this);
-        webDriverWait = new WebDriverWait(webDriver, 1000);
-        javascriptExecutor = (JavascriptExecutor) webDriver;
-
+        wait = new WebDriverWait(webDriver, 1000);
+        js = (JavascriptExecutor) webDriver;
     }
 
-    public void openNoteTab() {
-        javascriptExecutor.executeScript("arguments[0].click();", notesTabField);
+    public void openNoteTabJS() {
+        js.executeScript("arguments[0].click();", notesTabField);
     }
 
-    public void openModal() {
-        javascriptExecutor.executeScript("arguments[0].click();", addNote);
+    public void openModalJS() {
+        js.executeScript("arguments[0].click();", addNote);
     }
 
-    public void createNote(String title, String description) {
-        javascriptExecutor.executeScript("arguments[0].value='" + title + "';", noteTitle);
-        javascriptExecutor.executeScript("arguments[0].value='" + description + "';", noteDescription);
+    public void createNoteJS(String title, String description) {
+        js.executeScript("arguments[0].value='" + title + "';", noteTitleField);
+        js.executeScript("arguments[0].value='" + description + "';", noteDescriptionField);
     }
 
-    public void saveNote() {
-        javascriptExecutor.executeScript("arguments[0].click();", noteSubmit);
+    public void saveNoteJS() {
+        js.executeScript("arguments[0].click();", saveNote);
     }
 
-    public void editNote() {
-        javascriptExecutor.executeScript("arguments[0].click();", editNote);
+    public void editNoteJS() {
+        js.executeScript("arguments[0].click();", editNote);
     }
 
-    public void deleteNote() {
-        javascriptExecutor.executeScript("arguments[0].click();", deleteNote);
+    public void deleteNoteJS() {
+        js.executeScript("arguments[0].click();", deleteNote);
     }
 
-    public String getNoteTitle() {
-        return tableNoteTitle.getAttribute("notetitle");
+    public String getTableNoteTitle() {
+        return tableNoteTitle.getAttribute("innerHTML");
     }
 
-    public boolean hasNotes() {
+    public Boolean hasNotes() {
         List<WebElement> notesList = notesTable.findElements(By.tagName("td"));
         try {
             for (int i = 0; i < notesList.size(); i++) {
-                WebElement webElement = notesList.get(i);
-                webElement.findElement(By.id("table-noteTitle"));
+                WebElement element = notesList.get(i);
+                element.findElement(By.id("table-noteTitle"));
             }
         } catch (NoSuchElementException e) {
             return false;
         }
+
         return true;
     }
+}
 
-  }
