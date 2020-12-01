@@ -77,7 +77,7 @@ public class NotePage {
     }
 
     public String getNoteTitle() {
-        return tableNoteTitle.getAttribute("noteTitle");
+        return tableNoteTitle.getAttribute("notetitle");
     }
 
     public boolean hasNotes() {

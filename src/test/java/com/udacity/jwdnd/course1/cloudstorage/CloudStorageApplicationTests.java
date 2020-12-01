@@ -76,12 +76,12 @@ class CloudStorageApplicationTests {
 		getSignupAndLogin();
 		NotePage notePage = new NotePage(driver);
 		ResultPage resultPage = new ResultPage(driver);
-		createNote(notePage, "noteTitle", "Note description");
+		createNote(notePage, "notetitle", "Note description");
 		Assertions.assertEquals("Result", driver.getTitle());
 		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTab();
-		Assertions.assertEquals("noteTitle", notePage.getNoteTitle());
+		Assertions.assertEquals("notetitle", notePage.getNoteTitle());
 	}
 
 	@Test
@@ -89,7 +89,7 @@ class CloudStorageApplicationTests {
 		getSignupAndLogin();
 		NotePage notePage = new NotePage(driver);
 		ResultPage resultPage = new ResultPage(driver);
-		createNote(notePage, "noteTitle", "Note description");
+		createNote(notePage, "notetitle", "Note description");
 		Assertions.assertEquals("Result", driver.getTitle());
 		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
