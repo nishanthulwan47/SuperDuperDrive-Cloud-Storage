@@ -171,7 +171,7 @@ class CloudStorageApplicationTests {
 		getSignupAndLogin();
 		CredentialPage credentialPage = new CredentialPage(driver);
 		ResultPage resultPage = new ResultPage(driver);
-		createCredential(credentialPage, "Credential url", "credential username", "credential password");
+		createCredential(credentialPage, "credential url", "credential username", "credential password");
 		Assertions.assertEquals("Result", driver.getTitle());
 		Assertions.assertEquals("New credential added!", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
