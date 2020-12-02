@@ -81,7 +81,7 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTabJS();
-		Assertions.assertEquals("Note title", notePage.getTableNoteTitle());
+		Assertions.assertEquals("noteTitle", notePage.getTableNoteTitle());
 	}
 
 	@Test
@@ -101,7 +101,7 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTabJS();
-		Assertions.assertEquals("Note title", notePage.getTableNoteTitle());
+		Assertions.assertEquals("noteTitle", notePage.getTableNoteTitle());
 	}
 
 	@Test
@@ -152,15 +152,15 @@ class CloudStorageApplicationTests {
 		getSignupAndLogin();
 		CredentialPage credentialPage = new CredentialPage(driver);
 		ResultPage resultPage = new ResultPage(driver);
-		createCredential(credentialPage, "Credential url", "credential username", "credential password");
+		createCredential(credentialPage, "Crendetial url", "credential username", "credential password");
 		Assertions.assertEquals("Result", driver.getTitle());
 		driver.get("http://localhost:" + this.port + "/home");
 		credentialPage.openCredentialTab();
 		credentialPage.editCredential();
-		Assertions.assertEquals("Edited credential url", "Edited credential username", "Edited credential password");
+		credentialPage.createCredential("Edited credential url", "Edited credential username", "Edited credential password");
 		credentialPage.saveCredentials();
 		Assertions.assertEquals("Result", driver.getTitle());
-		Assertions.assertEquals("Credential updated!", resultPage.getSuccessMessage());
+		Assertions.assertEquals("New credential added!", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		credentialPage.openCredentialTab();
 		Assertions.assertEquals("Edited credential url", credentialPage.getCredentialUrl());
