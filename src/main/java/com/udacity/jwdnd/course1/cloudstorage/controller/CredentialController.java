@@ -27,9 +27,14 @@ public class CredentialController {
         AppUser appUser = this.appUserService.getUser(authentication.getName());
         Integer userid = appUser.getUserid();
         credential.setUserid(userid);
+
         try {
-            Integer credId = credential.getCredentialid();
-            credentialService.addCredential(credential);
+            if (credential.getCredentialid() == null) {
+                credentialService.addCredential(credential);
+            } else {
+                System.out.println("HERE CRED");
+                credentialService.editCredential(credential);
+            }
             model.addAttribute("success", true);
             model.addAttribute("message", "New credential added!");
         } catch (Exception e) {

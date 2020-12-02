@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class CredentialPage {
 
@@ -40,7 +39,7 @@ public class CredentialPage {
     @FindBy (css = "#editCredentialButton")
     private WebElement editCredential;
 
-    @FindBy (css = "#deleteCredential")
+    @FindBy (css = "#deleteCredentialButton")
     private WebElement deleteCredential;
 
     private final JavascriptExecutor javascriptExecutor;
@@ -81,20 +80,12 @@ public class CredentialPage {
     }
 
     public String getCredentialUrl() {
-        return tableCredentialUrl.getAttribute("Credential title");
+        return tableCredentialUrl.getAttribute("innerHTML");
     }
 
     public boolean hasCredentials() {
-        List<WebElement> notesList = credentialsTable.findElements(By.tagName("td"));
-        try {
-            for (int i = 0; i < notesList.size(); i++) {
-                WebElement webElement = notesList.get(i);
-                webElement.findElement(By.id("table-credentialUrl"));
-            }
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-        return true;
+        List<WebElement> credentialList = credentialsTable.findElements(By.id("table-credentialUrl"));
+        return credentialList.size() != 0;
     }
 
 }

@@ -28,7 +28,11 @@ public class NoteController {
         note.setUserid(userid);
 
         try {
-            noteService.createNote(note);
+            if (note.getNoteid() == null) {
+                noteService.createNote(note);
+            } else {
+                noteService.editNote(note);
+            }
             model.addAttribute("success", true);
             model.addAttribute("message", "New note added !");
         } catch (Exception e) {

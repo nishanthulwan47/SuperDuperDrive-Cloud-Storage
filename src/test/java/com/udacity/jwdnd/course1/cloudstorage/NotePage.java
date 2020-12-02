@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class NotePage {
 
@@ -79,18 +78,9 @@ public class NotePage {
         return tableNoteTitle.getAttribute("innerHTML");
     }
 
-   public Boolean hasNotes() {
-        List<WebElement> notesList = notesTable.findElements(By.tagName("th"));
-        try {
-            for (int i = 0; i < notesList.size(); i++) {
-                WebElement element = notesList.get(i);
-                element.findElement(By.id("table-noteTitle"));
-            }
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-
-        return true;
-    }
+   public boolean hasNotes() {
+       List<WebElement> notesList = notesTable.findElements(By.id("table-noteTitle"));
+       return notesList.size() != 0;
+   }
 }
 

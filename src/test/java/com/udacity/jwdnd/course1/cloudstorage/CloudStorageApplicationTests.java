@@ -6,9 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class CloudStorageApplicationTests {
 
 	@LocalServerPort
@@ -81,7 +85,7 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTabJS();
-		Assertions.assertEquals("noteTitle", notePage.getTableNoteTitle());
+		Assertions.assertEquals("Note title", notePage.getTableNoteTitle());
 	}
 
 	@Test
@@ -95,7 +99,7 @@ class CloudStorageApplicationTests {
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTabJS();
 		notePage.editNoteJS();
-		notePage.createNoteJS("Note title", "Edited note description");
+		notePage.createNoteJS("noteTitle", "Edited note description");
 		notePage.saveNoteJS();
 		Assertions.assertEquals("Result", driver.getTitle());
 		Assertions.assertEquals("New note added !", resultPage.getSuccessMessage());
@@ -123,7 +127,6 @@ class CloudStorageApplicationTests {
 
 	}
 
-	@Test
 	public void createCredential(CredentialPage credentialPage, String url, String username, String password) {
 
 		credentialPage.openCredentialModal();
@@ -144,7 +147,7 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("New credential added!", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		credentialPage.openCredentialTab();
-		Assertions.assertEquals("Credential Url", credentialPage.getCredentialUrl());
+		Assertions.assertEquals("credential url", credentialPage.getCredentialUrl());
 	}
 
 	@Test
