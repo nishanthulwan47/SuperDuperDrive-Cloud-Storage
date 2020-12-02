@@ -33,7 +33,7 @@ public class NoteController {
             model.addAttribute("message", "New note added !");
         } catch (Exception e) {
             model.addAttribute("error", true);
-            model.addAttribute("message", "Cannot find Note" + e.getMessage());
+            model.addAttribute("message", "System error!" + e.getMessage());
         }
         return new ModelAndView("result");
     }
@@ -48,10 +48,10 @@ public class NoteController {
         try {
             noteService.deleteNote(note, noteid);
             model.addAttribute("success", true);
-            model.addAttribute("message", "Note has been deleted successfully");
+            model.addAttribute("message", "Note deleted!");
         } catch (Exception e) {
             model.addAttribute("error", true);
-            model.addAttribute("message", "Note has not been deleted please try again" + e.getMessage());
+            model.addAttribute("message", "System error!" + e.getMessage());
         }
         return new ModelAndView("result");
     }

@@ -31,10 +31,10 @@ public class CredentialController {
             Integer credId = credential.getCredentialid();
             credentialService.addCredential(credential);
             model.addAttribute("success", true);
-            model.addAttribute("message", "successfully added credentials");
+            model.addAttribute("message", "New credential added!");
         } catch (Exception e) {
             model.addAttribute("error", true);
-            model.addAttribute("message", "failed to add credentials" + e.getMessage());
+            model.addAttribute("message", "System error!" + e.getMessage());
         }
         return new ModelAndView("result");
     }
@@ -49,10 +49,10 @@ public class CredentialController {
         try {
             credentialService.deleteCredential(credentialDelete, credentialId);
             model.addAttribute("success", true);
-            model.addAttribute("message", "Credentials Deleted");
+            model.addAttribute("message", "Credentials deleted!");
         } catch (Exception e) {
             model.addAttribute("error", true);
-            model.addAttribute("message", "System error" + e.getMessage());
+            model.addAttribute("message", "System error!" + e.getMessage());
         }
         return new ModelAndView("result");
     }

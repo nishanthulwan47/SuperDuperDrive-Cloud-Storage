@@ -1,11 +1,15 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public class NotePage {
 
@@ -75,18 +79,18 @@ public class NotePage {
         return tableNoteTitle.getAttribute("innerHTML");
     }
 
-//    public Boolean hasNotes() {
-//        List<WebElement> notesList = notesTable.findElements(By.tagName("th"));
-//        try {
-//            for (int i = 0; i < notesList.size(); i++) {
-//                WebElement element = notesList.get(i);
-//                element.findElement(By.id("table-noteTitle"));
-//            }
-//        } catch (NoSuchElementException e) {
-//            return false;
-//        }
-//
-//        return true;
-//    }
+   public Boolean hasNotes() {
+        List<WebElement> notesList = notesTable.findElements(By.tagName("th"));
+        try {
+            for (int i = 0; i < notesList.size(); i++) {
+                WebElement element = notesList.get(i);
+                element.findElement(By.id("table-noteTitle"));
+            }
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+
+        return true;
+    }
 }
 

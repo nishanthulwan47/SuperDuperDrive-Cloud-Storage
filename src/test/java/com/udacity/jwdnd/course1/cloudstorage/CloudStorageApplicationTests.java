@@ -116,10 +116,10 @@ class CloudStorageApplicationTests {
 		notePage.openNoteTabJS();
 		notePage.deleteNoteJS();
 		Assertions.assertEquals("Result", driver.getTitle());
-		Assertions.assertEquals("Note has been deleted successfully", resultPage.getSuccessMessage());
+		Assertions.assertEquals("Note deleted!", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		notePage.openNoteTabJS();
-		//Assertions.assertEquals(false, notePage.hasNotes());
+		Assertions.assertEquals(false, notePage.hasNotes());
 
 	}
 
@@ -141,10 +141,48 @@ class CloudStorageApplicationTests {
 		ResultPage resultPage = new ResultPage(driver);
 		createCredential(credentialPage, "credential url", "credential username", "credential password");
 		Assertions.assertEquals("Result", driver.getTitle());
-		Assertions.assertEquals("successfully added credentials", resultPage.getSuccessMessage());
+		Assertions.assertEquals("New credential added!", resultPage.getSuccessMessage());
 		driver.get("http://localhost:" + this.port + "/home");
 		credentialPage.openCredentialTab();
 		Assertions.assertEquals("Credential Url", credentialPage.getCredentialUrl());
+	}
+
+	@Test
+	public void editCredentialTest() {
+		getSignupAndLogin();
+		CredentialPage credentialPage = new CredentialPage(driver);
+		ResultPage resultPage = new ResultPage(driver);
+		createCredential(credentialPage, "Credential url", "credential username", "credential password");
+		Assertions.assertEquals("Result", driver.getTitle());
+		driver.get("http://localhost:" + this.port + "/home");
+		credentialPage.openCredentialTab();
+		credentialPage.editCredential();
+		Assertions.assertEquals("Edited credential url", "Edited credential username", "Edited credential password");
+		credentialPage.saveCredentials();
+		Assertions.assertEquals("Result", driver.getTitle());
+		Assertions.assertEquals("Credential updated!", resultPage.getSuccessMessage());
+		driver.get("http://localhost:" + this.port + "/home");
+		credentialPage.openCredentialTab();
+		Assertions.assertEquals("Edited credential url", credentialPage.getCredentialUrl());
+	}
+
+	@Test
+	public void deleteCredentialTest() {
+		getSignupAndLogin();
+		CredentialPage credentialPage = new CredentialPage(driver);
+		ResultPage resultPage = new ResultPage(driver);
+		createCredential(credentialPage, "Credential url", "credential username", "credential password");
+		Assertions.assertEquals("Result", driver.getTitle());
+		Assertions.assertEquals("New credential added!", resultPage.getSuccessMessage());
+		driver.get("http://localhost:" + this.port + "/home");
+		credentialPage.openCredentialTab();
+		credentialPage.deleteCredential();
+		Assertions.assertEquals("Result", driver.getTitle());
+		Assertions.assertEquals("Credentials deleted!", resultPage.getSuccessMessage());
+		driver.get("http://localhost:" + this.port + "/home");
+		credentialPage.openCredentialTab();
+		Assertions.assertEquals(false, credentialPage.hasCredentials());
+
 	}
 
 
