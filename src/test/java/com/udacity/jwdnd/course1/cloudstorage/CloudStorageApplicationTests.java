@@ -68,6 +68,12 @@ class CloudStorageApplicationTests {
 		Assertions.assertEquals("Login", driver.getTitle());
 	}
 
+	@Test
+	public void testRandomPage() {
+		driver.get("http://localhost:" + this.port + "/error");
+		Assertions.assertEquals("Login", driver.getTitle());
+	}
+
 	public void createNote(NotePage notePage, String title, String description) {
 		notePage.openNoteTabJS();
 		notePage.openModalJS();
