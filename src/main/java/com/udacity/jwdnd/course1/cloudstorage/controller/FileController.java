@@ -30,6 +30,7 @@ public class FileController {
     public ModelAndView postFile(@RequestParam("fileUpload") MultipartFile multipartFile, Authentication authentication,
                                  Model model) {
         if (multipartFile.isEmpty()) {
+            model.addAttribute("success", false);
             model.addAttribute("error", true);
             model.addAttribute("message", "File not selected to upload");
             return new ModelAndView("result");
@@ -39,6 +40,8 @@ public class FileController {
         Integer userId = appUser.getUserid();
 
         if (fileService.isFilenameAvailable(multipartFile.getOriginalFilename(), userId)) {
+
+            model.addAttribute("success", false);
             model.addAttribute("error", true);
             model.addAttribute("message", "file name already exists");
             return new ModelAndView("result");

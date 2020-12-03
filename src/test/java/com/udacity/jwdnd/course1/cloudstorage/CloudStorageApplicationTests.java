@@ -70,7 +70,7 @@ class CloudStorageApplicationTests {
 
 	@Test
 	public void testRandomPage() {
-		driver.get("http://localhost:" + this.port + "/error");
+		driver.get("http://localhost:" + this.port + "/test");
 		Assertions.assertEquals("Login", driver.getTitle());
 	}
 

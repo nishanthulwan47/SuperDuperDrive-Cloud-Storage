@@ -61,4 +61,6 @@ public class CredentialService {
     public String encryptPassword(Credential credential) {
         return this.encryptionService.encryptValue(credential.getPassword(), credential.getKey());
     }
+
+
 }
