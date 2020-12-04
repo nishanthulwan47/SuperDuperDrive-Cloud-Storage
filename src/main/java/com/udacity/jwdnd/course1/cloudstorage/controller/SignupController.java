@@ -46,6 +46,6 @@ public class SignupController {
         } else {
             model.addAttribute("signupError", signupError);
         }
-        return "redirect:/login";
+        return "redirect:/login?signupSuccess";
     }
 }
