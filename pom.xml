@@ -14,9 +14,7 @@
     <name>SuperDuperDrive Cloud Storage</name>
     <description>Final Project for Udacity's Spring Boot Basics course.</description>
 
-    <properties>
-        <java.version>14</java.version>
-    </properties>
+
 
     <dependencies>
         <dependency>
